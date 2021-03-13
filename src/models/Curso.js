@@ -1,18 +1,19 @@
 "use strict";
 const db = require("../config/dbConfig");
 
-class Campus {
-  // Criação de campus com parâmetro codigo, nome e cidade strings
-  create(nome, cidade, codigo) {
+class Curso {
+  // Criação de curso com parâmetro nome e cidade strings
+  create(nome, turno, codigoCurso, codigoCampus) {
     try {
 
       const data = {
-        codigo: String(codigo),
+        codigo: codigoCurso,
         nome: String(nome),
-        cidade: String(cidade),
+        turno: String(turno),
+        campusCodigo: String(codigoCampus)
       }
 
-      db.push(`/campus/${codigo}`, data);
+      db.push(`/curso/${codigoCurso}`, data);
 
       return data;
 
@@ -25,7 +26,7 @@ class Campus {
   list() {
     try {
       // Recebendo lista de objetos cadastrados
-      const objectData = db.getData("/campus/");
+      const objectData = db.getData("/curso/");
 
       // Convertendo objeto em lista e retornando
       const listData = [];
@@ -40,10 +41,10 @@ class Campus {
     }
   }
 
-  // Busca um item a partir do seu código
+  // Busca um item a partir do seu codigo
   get(codigo) {
     try {
-      const objectData = db.getData(`/campus/${codigo}`);
+      const objectData = db.getData(`/curso/${codigo}`);
       return objectData;
 
     } catch (error) {
@@ -51,10 +52,10 @@ class Campus {
     }
   }
 
-  // Deleta um item a partir de seu id
+  // Deleta um item a partir de seu codigo
   delete(codigo) {
     try {
-      db.delete(`/campus/${codigo}`);
+      db.delete(`/curso/${codigo}`);
 
     } catch (error) {
       throw error;
@@ -63,4 +64,4 @@ class Campus {
 
 }
 
-module.exports = Campus;
+module.exports = Curso;
