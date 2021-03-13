@@ -51,6 +51,26 @@ class Campus {
     }
   }
 
+  // Retorna lista de cursos associados a um campus
+  getCursos(codigo) {
+    try {
+      // Recebendo lista de objetos cadastrados
+      const objectData = db.getData("/curso/");
+
+      // Convertendo objeto em lista e retornando
+      const listData = [];
+      Object.keys(objectData).forEach(key => {
+        const data = objectData[key];
+        if (String(data.campusCodigo) === String(codigo)) listData.push(data);
+      });
+
+      return listData;
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
   // Deleta um item a partir de seu id
   delete(codigo) {
     try {

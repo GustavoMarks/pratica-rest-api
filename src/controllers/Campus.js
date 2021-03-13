@@ -3,6 +3,26 @@ const CampusModel = require("../models/Campus");
 const CursoModel = require("../models/Curso");
 
 module.exports = {
+  index(req, res) {
+    try {
+      const campus = new CampusModel();
+      const campusList = campus.list();
+      let resultData = [];
+
+      // Fazendo junção com cursos no dado retornado
+      campusList.forEach(item => {
+        const cursos = campus.getCursos(item.codigo);
+        resultData.push({ ...item, cursos });
+      });
+
+      return res.status(202).send(resultData);
+
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({ message: "Erro inerno", error });
+    }
+  },
+
   create(req, res) {
     try {
       let { codigo, nome, cidade, cursos } = req.body;
@@ -38,11 +58,11 @@ module.exports = {
       db.save();
 
       const result = { ...createdCampus, createdCursos };
-      return res.status(202).send(result);
+      return res.status(200).send(result);
 
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ message: "Erro inerno" });
+      return res.status(500).send({ message: "Erro inerno", error });
     }
   }
 }
