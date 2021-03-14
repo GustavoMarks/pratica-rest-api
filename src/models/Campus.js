@@ -47,7 +47,7 @@ class Campus {
       return objectData;
 
     } catch (error) {
-      if(error.id === 5) return null
+      if (error.id === 5) return null
       throw error;
     }
   }
@@ -66,6 +66,25 @@ class Campus {
       });
 
       return listData;
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Atualiza dados de um campus a partir do codigo
+  update(codigo, nome, cidade) {
+    try {
+
+      let campus = this.get(codigo);
+      if (!campus) return false;
+
+      campus.nome = nome || campus.nome;
+      campus.cidade = cidade || campus.cidade;
+
+      db.push(`/campus/${codigo}`, campus, false);
+
+      return true;
 
     } catch (error) {
       throw error;
