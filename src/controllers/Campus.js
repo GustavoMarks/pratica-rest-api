@@ -19,7 +19,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ message: "Erro inerno", error });
+      return res.status(500).send({ message: "Erro interno", error });
     }
   },
 
@@ -40,7 +40,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ message: "Erro inerno", error });
+      return res.status(500).send({ message: "Erro interno", error });
     }
   },
 
@@ -84,7 +84,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ message: "Erro inerno", error });
+      return res.status(500).send({ message: "Erro interno", error });
     }
   },
 
@@ -107,7 +107,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ message: "Erro inerno", error });
+      return res.status(500).send({ message: "Erro interno", error });
     }
   },
 
@@ -124,7 +124,7 @@ module.exports = {
 
     } catch (error) {
       console.log(error);
-      return res.status(500).send({ message: "Erro inerno", error });
+      return res.status(500).send({ message: "Erro interno", error });
     }
   }
 }
