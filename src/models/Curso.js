@@ -37,6 +37,7 @@ class Curso {
       return listData;
 
     } catch (error) {
+      if (error.id === 5) return [];
       throw error;
     }
   }
@@ -48,6 +49,7 @@ class Curso {
       return objectData;
 
     } catch (error) {
+      if (error.id === 5) return null
       throw error;
     }
   }

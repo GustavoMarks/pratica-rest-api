@@ -1,5 +1,6 @@
 "use strict";
 const db = require("../config/dbConfig");
+const Curso = require("./Curso");
 
 class Campus {
   // Criação de campus com parâmetro codigo, nome e cidade strings
@@ -36,6 +37,7 @@ class Campus {
       return listData;
 
     } catch (error) {
+      if (error.id === 5) return []
       throw error;
     }
   }
@@ -94,9 +96,22 @@ class Campus {
   // Deleta um item a partir de seu id
   delete(codigo) {
     try {
+      const findedCampus = this.get(codigo)
+      if (!findedCampus) return null;
       db.delete(`/campus/${codigo}`);
+      const curso = new Curso();
+      const cursosList = this.getCursos(codigo);
+
+      cursosList.forEach(item => {
+        curso.delete(item.codigo);
+      });
+
+      // TODO Remover lista de alunos cadastrados no campus
+
+      return true;
 
     } catch (error) {
+      if (error.id === 5) return false
       throw error;
     }
   }

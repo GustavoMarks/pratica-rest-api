@@ -108,5 +108,22 @@ module.exports = {
       console.log(error);
       return res.status(500).send({ message: "Erro inerno", error });
     }
+  },
+
+  delete(req, res) {
+    try {
+      const { codigo } = req.params;
+      const campus = new CampusModel();
+
+      const result = campus.delete(codigo);
+      db.save();
+
+      if (result) return res.sendStatus(200);
+      else return res.status(404).send({ message: "Campus não encontrado!" });
+
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({ message: "Erro inerno", error });
+    }
   }
 }
