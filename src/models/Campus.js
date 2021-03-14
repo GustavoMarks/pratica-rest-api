@@ -1,6 +1,7 @@
 "use strict";
 const db = require("../config/dbConfig");
 const Curso = require("./Curso");
+const Aluno = require("../models/Aluno");
 
 class Campus {
   // Criação de campus com parâmetro codigo, nome e cidade strings
@@ -106,11 +107,16 @@ class Campus {
       const curso = new Curso();
       const cursosList = this.getCursos(codigo);
 
+      const aluno = new Aluno();
+      const alunosList = aluno.list();
+
       cursosList.forEach(item => {
         curso.delete(item.codigo);
+        const cursoAluno = alunosList.filter(item => item.cursoCodigo === item.codigo);
+        cursoAluno.forEach(alunoItem => {
+          aluno.delete(alunoItem.matricula);
+        })
       });
-
-      // TODO Remover lista de alunos cadastrados no campus
 
       return true;
 
