@@ -23,6 +23,27 @@ module.exports = {
     }
   },
 
+  show(req, res) {
+    try {
+      const { codigo } = req.params;
+      const campus = new CampusModel();
+
+      let campusData = campus.get(codigo);
+      if (campusData) {
+        const cursosList = campus.getCursos(campusData.codigo);
+        campusData.cursos = cursosList;
+      } else {
+        return res.status(404).send({ message: "Campus não encontrado!" });
+      }
+
+      return res.status(200).send(campusData);
+
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({ message: "Erro inerno", error });
+    }
+  },
+
   create(req, res) {
     try {
       let { codigo, nome, cidade, cursos } = req.body;

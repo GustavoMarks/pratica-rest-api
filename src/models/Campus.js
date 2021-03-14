@@ -47,6 +47,7 @@ class Campus {
       return objectData;
 
     } catch (error) {
+      if(error.id === 5) return null
       throw error;
     }
   }
