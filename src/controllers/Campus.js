@@ -65,6 +65,7 @@ module.exports = {
 
       const campus = new CampusModel();
       const createdCampus = campus.create(nome, cidade, codigo);
+      if (!createdCampus) return res.status(400).send({ message: "Campus com o código enviado já existe" });
       const createdCursos = [];
 
       const curso = new CursoModel();

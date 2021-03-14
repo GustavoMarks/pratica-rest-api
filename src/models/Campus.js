@@ -7,6 +7,10 @@ class Campus {
   create(nome, cidade, codigo) {
     try {
 
+      // Verificando se campus já existe
+      const findedCampus = this.get(codigo);
+      if (findedCampus) return false;
+
       const data = {
         codigo: String(codigo),
         nome: String(nome),
