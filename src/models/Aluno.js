@@ -1,5 +1,4 @@
 "use strict";
-const { data } = require("../config/dbConfig");
 const db = require("../config/dbConfig");
 
 class Campus {
@@ -36,7 +35,8 @@ class Campus {
       // Convertendo objeto em lista e retornando
       const listData = [];
       Object.keys(objectData).forEach(key => {
-        listData.push(objectData[key]);
+        const data = { ...objectData[key], matricula: key }
+        listData.push(data);
       });
 
       return listData;

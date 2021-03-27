@@ -53,6 +53,10 @@ module.exports = {
       if (!findedCurso) return res.status(400).send({ message: "Curso não encontrado" });
 
       const aluno = new Aluno();
+      let alunoData = aluno.get(matricula);
+      if (alunoData) {
+        return res.status(403).send({ message: "Aluno já existe!" });
+      }
       const createdAluno = aluno.create(codigoCurso, matricula, nome, dataNascimento, operadora, ddd, numero);
 
       db.save();
